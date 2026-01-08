@@ -145,6 +145,16 @@ func (s *ServiceImpl) GetNavTree(c *contextmodel.ReqContext, prefs *pref.Prefere
 		})
 	}
 
+	// Add Observability section
+	treeRoot.AddSection(&navtree.NavLink{
+		Text:       "Observability",
+		Id:         navtree.NavIDObservability,
+		SubTitle:   "Monitor and observe your systems and applications",
+		Icon:       "eye",
+		SortWeight: navtree.WeightObservability,
+		Url:        s.cfg.AppSubURL + "/observability",
+	})
+
 	if s.cfg.ProfileEnabled && c.IsSignedIn {
 		treeRoot.AddSection(s.getProfileNode(c))
 	}
