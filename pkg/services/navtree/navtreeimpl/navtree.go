@@ -155,6 +155,56 @@ func (s *ServiceImpl) GetNavTree(c *contextmodel.ReqContext, prefs *pref.Prefere
 		Url:        s.cfg.AppSubURL + "/observability",
 	})
 
+	// Add CMDB Inventory section
+	treeRoot.AddSection(&navtree.NavLink{
+		Text:       "CMDB Inventory",
+		Id:         navtree.NavIDCMDBInventory,
+		SubTitle:   "Manage your configuration management database inventory",
+		Icon:       "database",
+		SortWeight: navtree.WeightCMDBInventory,
+		Url:        s.cfg.AppSubURL + "/cmdb-inventory",
+	})
+
+	// Add Automation Hub section
+	treeRoot.AddSection(&navtree.NavLink{
+		Text:       "Automation Hub",
+		Id:         navtree.NavIDAutomationHub,
+		SubTitle:   "Centralized automation workflows and runbooks",
+		Icon:       "cog",
+		SortWeight: navtree.WeightAutomationHub,
+		Url:        s.cfg.AppSubURL + "/automation-hub",
+	})
+
+	// Add Capacity Planning section
+	treeRoot.AddSection(&navtree.NavLink{
+		Text:       "Capacity Planning",
+		Id:         navtree.NavIDCapacityPlanning,
+		SubTitle:   "Plan and forecast infrastructure capacity",
+		Icon:       "graph-bar",
+		SortWeight: navtree.WeightCapacityPlanning,
+		Url:        s.cfg.AppSubURL + "/capacity-planning",
+	})
+
+	// Add Compliance section
+	treeRoot.AddSection(&navtree.NavLink{
+		Text:       "Compliance",
+		Id:         navtree.NavIDCompliance,
+		SubTitle:   "Monitor and manage compliance requirements",
+		Icon:       "shield",
+		SortWeight: navtree.WeightCompliance,
+		Url:        s.cfg.AppSubURL + "/compliance",
+	})
+
+	// Add Reports & Insights section
+	treeRoot.AddSection(&navtree.NavLink{
+		Text:       "Reports & Insights",
+		Id:         navtree.NavIDReportsInsights,
+		SubTitle:   "Generate reports and gain insights from your data",
+		Icon:       "file-alt",
+		SortWeight: navtree.WeightReportsInsights,
+		Url:        s.cfg.AppSubURL + "/reports-insights",
+	})
+
 	if s.cfg.ProfileEnabled && c.IsSignedIn {
 		treeRoot.AddSection(s.getProfileNode(c))
 	}

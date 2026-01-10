@@ -25,6 +25,11 @@ const (
 	WeightCMAB
 	WeightTestingAndSynthetics
 	WeightObservability
+	WeightCMDBInventory
+	WeightAutomationHub
+	WeightCapacityPlanning
+	WeightCompliance
+	WeightReportsInsights
 	WeightCloudServiceProviders
 	WeightInfrastructure
 	WeightApplication
@@ -48,6 +53,11 @@ const (
 	NavIDTestingAndSynthetics = "testing-and-synthetics"
 	NavIDAlerting             = "alerting"
 	NavIDObservability        = "observability"
+	NavIDCMDBInventory        = "cmdb-inventory"
+	NavIDAutomationHub        = "automation-hub"
+	NavIDCapacityPlanning     = "capacity-planning"
+	NavIDCompliance           = "compliance"
+	NavIDReportsInsights      = "reports-insights"
 	NavIDInfrastructure       = "infrastructure"
 	NavIDReporting            = "reports"
 	NavIDApps                 = "apps"
