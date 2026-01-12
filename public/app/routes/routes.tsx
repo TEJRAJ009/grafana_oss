@@ -207,6 +207,36 @@ export function getAppRoutes(): RouteDescriptor[] {
       component: () => <NavLandingPage navId="observability" />,
     },
     {
+      path: '/cmdb-inventory',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "CMDBInventoryPage" */ 'app/features/custom-sections/CMDBInventoryPage')
+      ),
+    },
+    {
+      path: '/automation-hub',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "AutomationHubPage" */ 'app/features/custom-sections/AutomationHubPage')
+      ),
+    },
+    {
+      path: '/capacity-planning',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "CapacityPlanningPage" */ 'app/features/custom-sections/CapacityPlanningPage')
+      ),
+    },
+    {
+      path: '/compliance',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "CompliancePage" */ 'app/features/custom-sections/CompliancePage')
+      ),
+    },
+    {
+      path: '/reports-insights',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "ReportsInsightsPage" */ 'app/features/custom-sections/ReportsInsightsPage')
+      ),
+    },
+    {
       path: '/infrastructure',
       component: () => <NavLandingPage navId="infrastructure" />,
     },
@@ -229,9 +259,9 @@ export function getAppRoutes(): RouteDescriptor[] {
       component:
         isDevEnv || config.featureToggles.enableExtensionsAdminPage
           ? SafeDynamicImport(
-              () =>
-                import(/* webpackChunkName: "PluginExtensionsLog" */ 'app/features/plugins/extensions/logs/LogViewer')
-            )
+            () =>
+              import(/* webpackChunkName: "PluginExtensionsLog" */ 'app/features/plugins/extensions/logs/LogViewer')
+          )
           : () => <Navigate replace to="/admin" />,
     },
     {
@@ -319,8 +349,8 @@ export function getAppRoutes(): RouteDescriptor[] {
       path: '/admin/authentication/ldap',
       component: config.featureToggles.ssoSettingsLDAP
         ? SafeDynamicImport(
-            () => import(/* webpackChunkName: "LdapSettingsPage" */ 'app/features/admin/ldap/LdapSettingsPage')
-          )
+          () => import(/* webpackChunkName: "LdapSettingsPage" */ 'app/features/admin/ldap/LdapSettingsPage')
+        )
         : LdapPage,
     },
     {
@@ -405,8 +435,8 @@ export function getAppRoutes(): RouteDescriptor[] {
       component: !config.verifyEmailEnabled
         ? () => <Navigate replace to="/signup" />
         : SafeDynamicImport(
-            () => import(/* webpackChunkName "VerifyEmailPage"*/ 'app/core/components/Signup/VerifyEmailPage')
-          ),
+          () => import(/* webpackChunkName "VerifyEmailPage"*/ 'app/core/components/Signup/VerifyEmailPage')
+        ),
       pageClass: 'login-page',
       chromeless: true,
     },
