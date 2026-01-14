@@ -208,6 +208,36 @@ export function getAppRoutes(): RouteDescriptor[] {
       component: () => <NavLandingPage navId="observability" />,
     },
     {
+      path: '/cmdb-inventory',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "CMDBInventoryPage" */ 'app/features/custom-sections/CMDBInventoryPage')
+      ),
+    },
+    {
+      path: '/automation-hub',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "AutomationHubPage" */ 'app/features/custom-sections/AutomationHubPage')
+      ),
+    },
+    {
+      path: '/capacity-planning',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "CapacityPlanningPage" */ 'app/features/custom-sections/CapacityPlanningPage')
+      ),
+    },
+    {
+      path: '/compliance',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "CompliancePage" */ 'app/features/custom-sections/CompliancePage')
+      ),
+    },
+    {
+      path: '/reports-insights',
+      component: SafeDynamicImport(
+        () => import(/* webpackChunkName: "ReportsInsightsPage" */ 'app/features/custom-sections/ReportsInsightsPage')
+      ),
+    },
+    {
       path: '/infrastructure',
       component: () => <NavLandingPage navId="infrastructure" />,
     },
