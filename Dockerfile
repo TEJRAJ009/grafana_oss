@@ -3,7 +3,7 @@
 # to maintain formatting of multiline commands in vscode, add the following to settings.json:
 # "docker.languageserver.formatter.ignoreMultilineInstructions": true
 
-ARG BASE_IMAGE=alpine-base
+ARG BASE_IMAGE=ubuntu-base
 ARG GO_IMAGE=go-builder-base
 ARG JS_IMAGE=js-builder-base
 ARG JS_PLATFORM=linux/amd64
@@ -138,17 +138,24 @@ ENV BUILD_BRANCH=${BUILD_BRANCH}
 
 RUN make build-go GO_BUILD_TAGS=${GO_BUILD_TAGS} WIRE_TAGS=${WIRE_TAGS}
 
-# From-tarball build stage
+# From-tarball build stage (only used when GO_SRC=tgz-builder)
+# This stage is skipped when building from source
 FROM ${BASE_IMAGE} AS tgz-builder
 
 WORKDIR /tmp/grafana
 
 ARG GRAFANA_TGZ="grafana-latest.linux-x64-musl.tar.gz"
 
-COPY ${GRAFANA_TGZ} /tmp/grafana.tar.gz
-
-# add -v to make tar print every file it extracts
-RUN tar x -z -f /tmp/grafana.tar.gz --strip-components=1
+# Note: This stage is only used when building from a pre-compiled tarball
+# When building from source, use: docker build --build-arg GO_SRC=go-builder --build-arg JS_SRC=js-builder .
+# The COPY below will fail if the tarball doesn't exist - this is expected when building from source
+COPY ${GRAFANA_TGZ}* /tmp/
+RUN if [ -f /tmp/grafana.tar.gz ] || [ -f /tmp/${GRAFANA_TGZ} ]; then \
+      TGZ_FILE=$(ls /tmp/grafana*.tar.gz 2>/dev/null | head -1) && \
+      tar x -z -f "$TGZ_FILE" --strip-components=1; \
+    else \
+      echo "No tarball found - this stage will be unused"; \
+    fi
 
 # helpers for COPY --from
 FROM ${GO_SRC} AS go-src
