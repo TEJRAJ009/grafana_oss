@@ -146,15 +146,15 @@ WORKDIR /tmp/grafana
 
 ARG GRAFANA_TGZ="grafana-latest.linux-x64-musl.tar.gz"
 
-# Note: This stage is only used when building from a pre-compiled tarball
-# When building from source, use: docker build --build-arg GO_SRC=go-builder --build-arg JS_SRC=js-builder .
-# The COPY below will fail if the tarball doesn't exist - this is expected when building from source
-COPY ${GRAFANA_TGZ}* /tmp/
-RUN if [ -f /tmp/grafana.tar.gz ] || [ -f /tmp/${GRAFANA_TGZ} ]; then \
-      TGZ_FILE=$(ls /tmp/grafana*.tar.gz 2>/dev/null | head -1) && \
-      tar x -z -f "$TGZ_FILE" --strip-components=1; \
+# Copy .dockerignore as a fallback (always exists) to prevent COPY from failing
+# The tarball is optional - only used when building from pre-compiled release
+COPY .dockerignore ${GRAFANA_TGZ}* /tmp/
+
+# Only extract if tarball exists
+RUN if [ -f /tmp/${GRAFANA_TGZ} ]; then \
+      tar x -z -f /tmp/${GRAFANA_TGZ} --strip-components=1; \
     else \
-      echo "No tarball found - this stage will be unused"; \
+      echo "No tarball found - this stage will be unused when building from source"; \
     fi
 
 # helpers for COPY --from

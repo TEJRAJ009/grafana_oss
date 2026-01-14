@@ -25,7 +25,6 @@ import { SafeDynamicImport } from '../core/components/DynamicImports/SafeDynamic
 import { RouteDescriptor } from '../core/navigation/types';
 import { getPublicDashboardRoutes } from '../features/dashboard/routes';
 import { getProvisioningRoutes } from '../features/provisioning/utils/routes';
-import { SingleDashboardView } from '../features/custom-sections/SingleDashboardView';
 
 const isDevEnv = config.buildInfo.env === 'development';
 export const extraRoutes: RouteDescriptor[] = [];
@@ -586,26 +585,6 @@ export function getAppRoutes(): RouteDescriptor[] {
     {
       path: '/goto/*',
       component: HandleGoToRedirect,
-    },
-    {
-      path: '/cmdb-inventory',
-      component: () => <SingleDashboardView title="CMDB Inventory" />,
-    },
-    {
-      path: '/automation-hub',
-      component: () => <SingleDashboardView title="Automation Hub" />,
-    },
-    {
-      path: '/capacity-planning',
-      component: () => <SingleDashboardView title="Capacity Planning" />,
-    },
-    {
-      path: '/compliance',
-      component: () => <SingleDashboardView title="Compliance" />,
-    },
-    {
-      path: '/reports-insights',
-      component: () => <SingleDashboardView title="Reports & Insights" />,
     },
     {
       path: '/*',
