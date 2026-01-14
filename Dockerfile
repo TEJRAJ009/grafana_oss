@@ -140,15 +140,15 @@ RUN make build-go GO_BUILD_TAGS=${GO_BUILD_TAGS} WIRE_TAGS=${WIRE_TAGS}
 
 # From-tarball build stage (only used when GO_SRC=tgz-builder)
 # This stage is skipped when building from source
-FROM ${BASE_IMAGE} AS tgz-builder
+#FROM ${BASE_IMAGE} AS tgz-builder
 
-WORKDIR /tmp/grafana
+#WORKDIR /tmp/grafana
 
-ARG GRAFANA_TGZ="grafana-latest.linux-x64-musl.tar.gz"
+#ARG GRAFANA_TGZ="grafana-latest.linux-x64-musl.tar.gz"
 
 # Copy .dockerignore as a fallback (always exists) to prevent COPY from failing
 # The tarball is optional - only used when building from pre-compiled release
-COPY .dockerignore ${GRAFANA_TGZ}* /tmp/
+#COPY .dockerignore ${GRAFANA_TGZ}* /tmp/
 
 # Only extract if tarball exists
 RUN if [ -f /tmp/${GRAFANA_TGZ} ]; then \
