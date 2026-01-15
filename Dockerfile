@@ -151,11 +151,11 @@ RUN make build-go GO_BUILD_TAGS=${GO_BUILD_TAGS} WIRE_TAGS=${WIRE_TAGS}
 #COPY .dockerignore ${GRAFANA_TGZ}* /tmp/
 
 # Only extract if tarball exists
-RUN if [ -f /tmp/${GRAFANA_TGZ} ]; then \
-      tar x -z -f /tmp/${GRAFANA_TGZ} --strip-components=1; \
-    else \
-      echo "No tarball found - this stage will be unused when building from source"; \
-    fi
+#RUN if [ -f /tmp/${GRAFANA_TGZ} ]; then \
+#      tar x -z -f /tmp/${GRAFANA_TGZ} --strip-components=1; \
+#    else \
+#      echo "No tarball found - this stage will be unused when building from source"; \
+#    fi
 
 # helpers for COPY --from
 FROM ${GO_SRC} AS go-src
