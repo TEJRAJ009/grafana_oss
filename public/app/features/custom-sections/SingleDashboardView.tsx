@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { useEffect, useState } from 'react';
 import { GrafanaTheme2 } from '@grafana/data';
 import { getBackendSrv } from '@grafana/runtime';
-import { Button, useStyles2, Text, Box, Stack, Spinner, Card, LinkButton } from '@grafana/ui';
+import { Button, useStyles2, Text, Box, Stack, Spinner, Card } from '@grafana/ui';
 import { Page } from 'app/core/components/Page/Page';
 
 export interface SingleDashboardViewProps {
@@ -87,11 +87,11 @@ export const SingleDashboardView = ({
   }, [folderTitle]);
 
   const handleCreateDashboard = () => {
-    // Navigate to dashboard creation with folder pre-selected
+    // Navigate to dashboard creation with folder pre-selected and section ID for breadcrumb
     if (folder) {
-      window.location.href = `/dashboard/new?folderUid=${folder.uid}`;
+      window.location.href = `/dashboard/new?folderUid=${folder.uid}&sectionId=${navId}`;
     } else {
-      window.location.href = '/dashboard/new';
+      window.location.href = `/dashboard/new?sectionId=${navId}`;
     }
   };
 

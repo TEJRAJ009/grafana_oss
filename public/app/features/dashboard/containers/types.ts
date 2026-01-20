@@ -8,6 +8,7 @@ export interface DashboardPageRouteParams {
 export type DashboardPageRouteSearchParams = {
   tab?: string;
   folderUid?: string;
+  sectionId?: string;  // Custom section ID for breadcrumb navigation (e.g., 'automation-hub')
   editPanel?: string;
   viewPanel?: string;
   editview?: string;

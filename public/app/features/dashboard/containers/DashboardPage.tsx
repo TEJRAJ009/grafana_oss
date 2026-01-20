@@ -459,7 +459,9 @@ function updateStatePageNavFromProps(props: Props, state: State): State {
     };
   }
 
-  sectionNav = getNavModel(props.navIndex, ID_PREFIX + dashboard.uid, getNavModel(props.navIndex, 'dashboards/browse'));
+  // Use sectionId from query params if available (for custom sections like automation-hub)
+  const defaultSectionId = props.queryParams.sectionId || 'dashboards/browse';
+  sectionNav = getNavModel(props.navIndex, ID_PREFIX + dashboard.uid, getNavModel(props.navIndex, defaultSectionId));
 
   const { folderUid } = dashboard.meta;
   if (folderUid && pageNav && sectionNav.main.id !== 'starred') {
